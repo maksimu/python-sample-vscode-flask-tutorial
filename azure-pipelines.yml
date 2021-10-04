@@ -24,7 +24,6 @@ steps:
     version: "v0.7.x"
 
 - task: KSMSample1@0.0.3
-  inputs:
     
 - script: |
     python -m pip install --upgrade pip
