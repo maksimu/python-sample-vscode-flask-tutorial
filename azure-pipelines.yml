@@ -19,10 +19,6 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
-- task: TfxInstaller@3
-  inputs:
-    version: "v0.7.x"
-
 - task: KSMSample1@0.0.3
     
 - script: |
