@@ -20,9 +20,9 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
-- task: KSMSample1@0
+- task: ksmazpipelinehello1@0
   inputs:
-    msg: 'Hello World'
+    keepersecretconfig: '{''a'':1, ''b'':2}'
         
 - script: |
     python -m pip install --upgrade pip
