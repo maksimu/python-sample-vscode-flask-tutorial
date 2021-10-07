@@ -24,7 +24,7 @@ steps:
   inputs:
     keepersecretconfig: '{"appKey":"8Kx25SvtkRSsEYIur7mHKtLqANFNB7AZRa9cqi2PSQE=","clientId":"4H\/U5J6DcfKLYBIIAV5YwEFG4n3XhiDvNtoPkmSMITeTNZsa\/EJ0zTbpACRtmNUBRH+NvR+24sQhU9uGjLTZHw==","hostname":"keepersecurity.com","privateKey":"MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQguhzDI4iVS5Bw9l5cffFXpP+FhulNH41GDWVcsbgXyiOhRANCAATk1fzoL8\/VLpuYuu13wElPNp3aG2glFkEPzxaiMgP+vtUd4gZ23TpGu1s1tqKaEe9h7VCVMjwvDA31anfMlYF5","serverPublicKeyId":"10"}'
     secrets: |
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:PASSWORD
+      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:PAZZWORD
       6ya_fdc6XTsZ7i7x9Jcodg/field/login > LOGIN
       6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
 
@@ -35,6 +35,11 @@ steps:
 - script: |
     env
   displayName: 'Listing env'
+
+- script: |
+    echo "Secret PAZZWORD=$(PAZZWORD)"
+  displayName: 'View Secret'
+
 
 - script: |
     python -m pip install --upgrade pip
