@@ -27,7 +27,10 @@ steps:
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:PASSWORD
       6ya_fdc6XTsZ7i7x9Jcodg/field/login > LOGIN
       6ya_fdc6XTsZ7i7x9Jcodg/field/login > env:LOGIN
-    
+      6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
+
+- script: |
+    ls -la /tmp
 - script: |
     python -m pip install --upgrade pip
     pip install -r requirements.txt
