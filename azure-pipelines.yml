@@ -46,10 +46,13 @@ steps:
   displayName: 'View Secret'
 
 - powershell: |
+    echo ONE
     echo $env:PAZZWORD
+    echo TWO
     echo $env:PWD
+    echo THREE
   env:
-    PWD: $($(pazzword))
+    PWD: $(pazzword)
   displayName: Powershell1
 # - script: |
 #     python -m pip install --upgrade pip
