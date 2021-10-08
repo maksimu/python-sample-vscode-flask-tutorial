@@ -42,7 +42,7 @@ steps:
 
 - script: |
     echo "Secret pazzword=$(pazzword)"
-    echo PAZZWORD
+    echo $PAZZWORD
   displayName: 'View Secret'
 
 
