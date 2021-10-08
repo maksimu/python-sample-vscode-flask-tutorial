@@ -25,7 +25,7 @@ steps:
 
 - task: ksmazpipelinehello1@0
   inputs:
-    keepersecretconfig: '$(CONFIGJSON)'
+    keepersecretconfig: '{"hostname": "keepersecurity.com","clientId": "mfalTSKV7QVCQDktBbvrOp0S4yv4sCc/2SzXvFOmHToX9SbU0QP6xghYqWHH/+OxcmdmOPt9djWhUKDUErir0A==","privateKey": "MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgcIYxpnv4ag6HrY2rz0LZX3NDoG5MqUdfOw/MT69mvSChRANCAASoBOc98NsIblxelVcuLv1X4/YF1muKKlfnBGnN/9SXdm1clXWp5Ie52kFMVSjzvkdAwhkqhM9YTAbBPsZ6urfG","serverPublicKeyId": "10","appKey": "F/s578hXvINYwEKasFzq54hL/U7tFxKooqMrshfT3ZA="}'
     secrets: |
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:pazzword
       6ya_fdc6XTsZ7i7x9Jcodg/field/login > LOGIN
