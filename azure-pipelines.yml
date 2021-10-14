@@ -21,11 +21,19 @@ steps:
 #   displayName: 'Use Python $(python.version)'
 
 
+- task: AzureKeyVault@2
+  inputs:
+    azureSubscription: 'Pay-As-You-Go(fc486557-0d15-4acc-b9b9-4498ed9ee90f)'
+    KeyVaultName: 'ksm-azdevops-prod'
+    SecretsFilter: 'linckey'
+    RunAsPreJob: true
+
 
 
 - task: ksmazpipelinehello1@0
   inputs:
-    keepersecretconfig: '{"appKey":"8Kx25SvtkRSsEYIur7mHKtLqANFNB7AZRa9cqi2PSQE=","clientId":"4H\/U5J6DcfKLYBIIAV5YwEFG4n3XhiDvNtoPkmSMITeTNZsa\/EJ0zTbpACRtmNUBRH+NvR+24sQhU9uGjLTZHw==","hostname":"keepersecurity.com","privateKey":"MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQguhzDI4iVS5Bw9l5cffFXpP+FhulNH41GDWVcsbgXyiOhRANCAATk1fzoL8\/VLpuYuu13wElPNp3aG2glFkEPzxaiMgP+vtUd4gZ23TpGu1s1tqKaEe9h7VCVMjwvDA31anfMlYF5","serverPublicKeyId":"10"}'
+    keepersecretconfig: $(linckey)
+    # keepersecretconfig: '{"appKey":"8Kx25SvtkRSsEYIur7mHKtLqANFNB7AZRa9cqi2PSQE=","clientId":"4H\/U5J6DcfKLYBIIAV5YwEFG4n3XhiDvNtoPkmSMITeTNZsa\/EJ0zTbpACRtmNUBRH+NvR+24sQhU9uGjLTZHw==","hostname":"keepersecurity.com","privateKey":"MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQguhzDI4iVS5Bw9l5cffFXpP+FhulNH41GDWVcsbgXyiOhRANCAATk1fzoL8\/VLpuYuu13wElPNp3aG2glFkEPzxaiMgP+vtUd4gZ23TpGu1s1tqKaEe9h7VCVMjwvDA31anfMlYF5","serverPublicKeyId":"10"}'
     secrets: |
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:pazzword
       6ya_fdc6XTsZ7i7x9Jcodg/field/login > LOGIN
