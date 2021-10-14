@@ -20,13 +20,12 @@ steps:
 #     versionSpec: '$(python.version)'
 #   displayName: 'Use Python $(python.version)'
 
-
 - task: AzureKeyVault@2
   inputs:
-    azureSubscription: 'Pay-As-You-Go(fc486557-0d15-4acc-b9b9-4498ed9ee90f)'
+    azureSubscription: 'Pay-As-You-Go(1)(fc486557-0d15-4acc-b9b9-4498ed9ee90f)'
     KeyVaultName: 'ksm-azdevops-prod'
-    SecretsFilter: 'linckey'
-    RunAsPreJob: true
+    SecretsFilter: '*'
+    RunAsPreJob: false
 
 
 
