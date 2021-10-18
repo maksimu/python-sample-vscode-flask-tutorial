@@ -12,8 +12,8 @@ steps:
     keepersecretconfig: $(sm-config)
     secrets: |
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
+      6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
       6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
 
 - bash: |
@@ -26,3 +26,6 @@ steps:
     MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
   name: display_secret_values
 
+
+- bash: |
+    echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
