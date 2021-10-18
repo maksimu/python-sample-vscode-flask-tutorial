@@ -35,11 +35,14 @@ jobs:
       cat << EOF > decrypted.txt
       This is a decrypted message
       EOF
-  
+    name: create_text_file
+
   - bash: cat decrypted.txt
     name: view_decrpyted_content
 
+
   - bash: openssl rsautl -encrypt -inkey /tmp/public_key.pem -pubin -in decrypted.txt -out ecrypted.bin
+    name: encrypte_file
 
   - bash: cat ecrypted.bin
     name: view_encrpyted_content
@@ -55,9 +58,14 @@ jobs:
 
 
 - job: encryptFileTest
+  dependsOn: ksmSecrets
+  variables:
+    # map the output variable from A into this job
+    varFromksmSecrets: $[ dependencies.ksmSecrets.outputs['ProduceVar.MyVar'] ]
+
   steps:
     - bash: |
-        echo "password retrieved from 'ksmSecrets'=$(ksmSecrets.setKsmSecretsStep.out_password)"
+        echo "password retrieved from job 'ksmSecrets', step 'setKsmSecretsStep', out variable 'setKsmSecretsStep.out_password':$(setKsmSecretsStep.out_password)"
     
 
 
