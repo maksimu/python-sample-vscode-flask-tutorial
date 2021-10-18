@@ -18,7 +18,7 @@ jobs:
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
-        6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pem > file:/tmp/mykey.pem
+        6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pub > file:/tmp/mykey.pem
 
   - bash: |
       echo "Using an input-macro works                : $(var_password)"
