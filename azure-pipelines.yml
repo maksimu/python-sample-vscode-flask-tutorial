@@ -18,14 +18,14 @@ jobs:
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
-        6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
+        6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pem > file:/tmp/mykey.pem
 
   - bash: |
       echo "Using an input-macro works                : $(var_password)"
       echo "Using an output variable (default method) : $(setKsmSecretsStep.out_password2)"
       echo "Using an output variable                  : $(setKsmSecretsStep.out_password)"
       echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
-      echo "Check injected secret file                : $(file /tmp/build-vsix.sh)"
+      echo "Check injected secret file                : $(file /tmp/mykey.pem)"
     env:
       MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
     name: display_secret_values
@@ -34,13 +34,14 @@ jobs:
 - job: createBinary
   steps:
     - bash: |
-        cat << EOF > hello.cpp
-        #include <iostream>
-        int main(){std::cout << "Hello, World!\n";}
+        cat << EOF > decrypted.txt
+        This is a decrypted message
         EOF
-    - bash: |
-        g++ -o hello.bin hello.cpp
-    - bash: ./hello.bin
+    
+    - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
+    - bash: ls -la
+
+
 
 
   # - create binary
