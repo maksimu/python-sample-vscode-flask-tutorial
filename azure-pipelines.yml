@@ -31,9 +31,9 @@ steps:
 
 - bash: echo $(var_password)
 - bash: echo $(setKsmSecretsStep.out_password)
-  name: "Format-out_out_password"
+  name: "Format-out-out-password"
 - bash: echo $(setKsmSecretsStep.out_password2)
-  name: "Format-out_password2"
+  name: "Format-out-password2"
 
 - bash: echo $(setPwdStep)
 - bash: echo $SECRET_KSMAZPIPELINETASK_OUT:OUT_PASSWORD
