@@ -26,14 +26,14 @@ steps:
   name: "GOOD_Format_out_password2"
 
 - bash: echo $MY_MAPPED_ENV_VAR_PASSWORD
-  name: "Format_env_variable_out_password"
+  name: "GOOD_Format_env_variable_out_password"
   env:
     MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
 
 
 - script: |
     ls -la /tmp/build-vsix.sh
-  name: "Show_Secret_File"
+  name: "GOOD_Show_Secret_File"
 
 
 # - bash: |
