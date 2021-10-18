@@ -16,6 +16,8 @@ strategy:
 
 steps:
 
+
+
 - task: ksmazpipelinetask@0
   inputs:
     keepersecretconfig: $(sm-config)
