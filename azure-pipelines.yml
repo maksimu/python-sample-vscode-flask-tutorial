@@ -18,14 +18,15 @@ jobs:
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
         6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
-        6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pub > file:/tmp/mykey.pem
+        6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pub > file:/tmp/public_key.pem
+        6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pem > file:/tmp/private_key.pem
 
   - bash: |
       echo "Using an input-macro works                : $(var_password)"
       echo "Using an output variable (default method) : $(setKsmSecretsStep.out_password2)"
       echo "Using an output variable                  : $(setKsmSecretsStep.out_password)"
       echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
-      echo "Check injected secret file                : $(file /tmp/mykey.pem)"
+      echo "Check injected secret file                : $(file /tmp/public_key.pem)"
     env:
       MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
     name: display_secret_values
@@ -35,9 +36,20 @@ jobs:
       This is a decrypted message
       EOF
   
-  - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
+  - bash: openssl rsautl -encrypt -inkey /tmp/public_key.pem -pubin -in decrypted.txt -out ecrypted.bin
   - bash: cat decrypted.txt
+    name: view_decrpyted_content
+
   - bash: cat ecrypted.bin
+    name: view_encrpyted_content
+
+  - bash: openssl rsautl -decrypt -inkey /tmp/private_key.pem -in ecrypted.bin -out decrypted2.txt
+    name: decrpyt_content
+
+  - bash: cat decrypted2.txt
+    name: view_decrpyted_content
+
+
 
 
 
