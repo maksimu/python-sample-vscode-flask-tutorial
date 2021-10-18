@@ -30,7 +30,8 @@ steps:
 
 - bash: echo $(var_password)
 - bash: echo $(env_password)
-- bash: echo $env_password # variables are available in the script environment too
+- bash: echo $SECRET_KSMAZPIPELINETASK_OUT:OUT_PASSWORD
+- bash: echo $SECRET_KSMAZPIPELINETASK_OUT_PASSWORD2 # variables are available in the script environment too
 
 - powershell: |
     Write-Host "Using an input-macro works: $(var_password)"
