@@ -15,11 +15,6 @@ strategy:
       python.version: '3.7'
 
 steps:
-# - task: UsePythonVersion@0
-#   inputs:
-#     versionSpec: '$(python.version)'
-#   displayName: 'Use Python $(python.version)'
-
 
 - task: ksmazpipelinetask@0
   inputs:
@@ -48,7 +43,7 @@ steps:
     echo $env:PAZZWORD
     echo TWO
     echo $env:PWD
-    echo THREE
+    echo $(login)
   env:
     PWD: $(pazzword)
   displayName: Powershell1
