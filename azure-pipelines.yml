@@ -53,15 +53,11 @@ jobs:
 
 
 
-# - job: encryptFileTest
-#   steps:
-#     - bash: |
-#         cat << EOF > decrypted.txt
-#         This is a decrypted message
-#         EOF
+- job: encryptFileTest
+  steps:
+    - bash: |
+        echo "password retrieved from 'ksmSecrets'=$(ksmSecrets.setKsmSecretsStep.out_password)"
     
-#     - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
-#     - bash: ls -la
 
 
 
