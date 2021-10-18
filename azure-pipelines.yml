@@ -24,20 +24,21 @@ steps:
     keepersecretconfig: $(sm-config)
     secrets: |
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:env_password
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
+      6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
+      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:env_password
       6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
 
 - bash: echo $(var_password)
   name: "GOOD_Format_var_password"
+
 - bash: echo $(setKsmSecretsStep.out_password)
   name: "GOOD_Format_out_out_password"
-  
-- bash: echo $(setKsmSecretsStep.out_password2)
-  name: "Format_out_password2"
 
-- bash: echo $(setPwdStep)
+- bash: echo $(setKsmSecretsStep.out_password2)
+  name: "GOOD_Format_out_password2"
+
+
 - bash: echo $SECRET_KSMAZPIPELINETASK_OUT:OUT_PASSWORD
 - bash: echo $SECRET_KSMAZPIPELINETASK_OUT_PASSWORD2 # variables are available in the script environment too
 
