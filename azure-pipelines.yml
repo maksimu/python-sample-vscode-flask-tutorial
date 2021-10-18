@@ -61,11 +61,11 @@ jobs:
   dependsOn: ksmSecrets
   variables:
     # map the output variable from A into this job
-    varFromksmSecrets: $[ dependencies.ksmSecrets.outputs['ProduceVar.MyVar'] ]
+    varFromksmSecrets: $[ dependencies.ksmSecrets.outputs['setKsmSecretsStep.out_password'] ]
 
   steps:
     - bash: |
-        echo "password retrieved from job 'ksmSecrets', step 'setKsmSecretsStep', out variable 'setKsmSecretsStep.out_password':$(setKsmSecretsStep.out_password)"
+        echo "password retrieved from job 'ksmSecrets', step 'setKsmSecretsStep', out variable 'setKsmSecretsStep.out_password':$(varFromksmSecrets)"
     
 
 
