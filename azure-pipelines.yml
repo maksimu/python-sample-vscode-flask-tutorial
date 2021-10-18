@@ -30,16 +30,25 @@ jobs:
       MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
     name: display_secret_values
 
+  - bash: |
+      cat << EOF > decrypted.txt
+      This is a decrypted message
+      EOF
+  
+  - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
+  - bash: ls -la
 
-- job: createBinary
-  steps:
-    - bash: |
-        cat << EOF > decrypted.txt
-        This is a decrypted message
-        EOF
+
+
+# - job: encryptFileTest
+#   steps:
+#     - bash: |
+#         cat << EOF > decrypted.txt
+#         This is a decrypted message
+#         EOF
     
-    - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
-    - bash: ls -la
+#     - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
+#     - bash: ls -la
 
 
 
