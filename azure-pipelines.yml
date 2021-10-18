@@ -22,15 +22,19 @@ steps:
   inputs:
     keepersecretconfig: $(sm-config)
     secrets: |
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:env_password
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
+      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:env_password
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
       6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
 
+- bash: echo $(var_password)
+- bash: echo $(env_password)
+- bash: echo $env_password # variables are available in the script environment too
 
 - powershell: |
     Write-Host "Using an input-macro works: $(var_password)"
+    Write-Host "${ variables.one }} # outputs initialValue"
     Write-Host "Using the mapped env var for this task works and is recommended: $env:MY_MAPPED_ENV_PASSWORD"
   env:
     MY_MAPPED_ENV_PASSWORD: $(env_password) # the recommended way to map to an env variable
