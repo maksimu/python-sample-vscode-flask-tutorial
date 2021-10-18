@@ -43,9 +43,9 @@ steps:
 - powershell: |
     echo ONE
     echo $env:PAZZWORD
+    echo $(pazzword)
     echo TWO
-    echo $env:PWD
-    echo $(login)
+    echo $env:LOGIN
   env:
     PWD: $(pazzword)
   displayName: Powershell1
