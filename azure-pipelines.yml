@@ -47,7 +47,7 @@ jobs:
     name: decrpyt_content
 
   - bash: cat decrypted2.txt
-    name: view_decrpyted_content
+    name: view_decrpyted2_content
 
 
 
