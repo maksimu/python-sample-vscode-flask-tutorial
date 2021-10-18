@@ -36,7 +36,8 @@ jobs:
       EOF
   
   - bash: openssl rsautl -encrypt -inkey /tmp/mykey.pem -pubin -in decrypted.txt -out ecrypted.bin
-  - bash: ls -la
+  - bash: cat decrypted.txt
+  - bash: cat ecrypted.bin
 
 
 
