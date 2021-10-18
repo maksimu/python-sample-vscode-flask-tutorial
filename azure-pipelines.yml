@@ -36,9 +36,10 @@ jobs:
       This is a decrypted message
       EOF
   
-  - bash: openssl rsautl -encrypt -inkey /tmp/public_key.pem -pubin -in decrypted.txt -out ecrypted.bin
   - bash: cat decrypted.txt
     name: view_decrpyted_content
+
+  - bash: openssl rsautl -encrypt -inkey /tmp/public_key.pem -pubin -in decrypted.txt -out ecrypted.bin
 
   - bash: cat ecrypted.bin
     name: view_encrpyted_content
