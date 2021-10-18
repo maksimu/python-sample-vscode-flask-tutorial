@@ -26,7 +26,6 @@ steps:
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
       6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > env:env_password
       6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
 
 - bash: echo $(var_password)
@@ -38,16 +37,16 @@ steps:
 - bash: echo $(setKsmSecretsStep.out_password2)
   name: "GOOD_Format_out_password2"
 
-
 - bash: echo $SECRET_KSMAZPIPELINETASK_OUT:OUT_PASSWORD
-- bash: echo $SECRET_KSMAZPIPELINETASK_OUT_PASSWORD2 # variables are available in the script environment too
-
-- powershell: |
-    Write-Host "Using an input-macro works: $(var_password)"
-    Write-Host "${ variables.one }} # outputs initialValue"
-    Write-Host "Using the mapped env var for this task works and is recommended: $env:MY_MAPPED_ENV_PASSWORD"
+  name: "Format_env_variable_out_password"
   env:
-    MY_MAPPED_ENV_PASSWORD: $(env_password) # the recommended way to map to an env variable
+    MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
+
+
+- script: |
+    ls -la /tmp/build-vsix.sh
+  name: "Show_Secret_File"
+
 
 # - bash: |
 #     echo "Using an input-macro works: $(mySecret)"
@@ -58,33 +57,3 @@ steps:
 #   env:
 #     MY_MAPPED_ENV_VAR: $(mySecret) # the recommended way to map to an env variable
 
-
-
-- script: |
-    ls -la /tmp
-  displayName: 'Listing files in /tmp directory'
-
-
-- script: |
-    echo "Secret pazzword=$(pazzword)"
-    echo $PAZZWORD
-  displayName: 'View Secret'
-
-- powershell: |
-    echo ONE
-    echo $env:PAZZWORD
-    echo "$env:PWD"
-    echo TWO
-    echo $env:LOGIN
-  env:
-    PWD: $(pazzword)
-  displayName: Powershell1
-# - script: |
-#     python -m pip install --upgrade pip
-#     pip install -r requirements.txt
-#   displayName: 'Install dependencies'
-
-# - script: |
-#     pip install pytest pytest-azurepipelines
-#     pytest
-#   displayName: 'pytest'
