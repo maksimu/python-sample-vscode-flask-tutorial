@@ -61,16 +61,12 @@ jobs:
   dependsOn: ksmSecrets
   variables:
     # map the output variable from A into this job
-    varFromksmSecrets: $[ dependencies.ksmSecrets.outputs['setKsmSecretsStep.out_password'] ]
+    # Note:
+    #   that files can't be shared between jobs each agent can run only one job at a time
+    #   one job is an independent running individual, the communication between different 
+    #   jobs requires the use of "middleware", like variable, artifact and etc.
+    pwdFromKsmSecrets: $[ dependencies.ksmSecrets.outputs['setKsmSecretsStep.out_password'] ]
 
   steps:
     - bash: |
-        echo "password retrieved from job 'ksmSecrets', step 'setKsmSecretsStep', out variable 'setKsmSecretsStep.out_password':$(varFromksmSecrets)"
-    
-
-
-
-
-  # - create binary
-  # - sign the binary with self signed certificate and a password
-  # - check if the file is signed
+        echo "password retrieved from job 'ksmSecrets', step 'pwdFromKsmSecrets', out variable 'setKsmSecretsStep.out_password':$(pwdFromKsmSecrets)"
