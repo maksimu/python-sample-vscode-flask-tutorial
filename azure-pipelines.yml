@@ -4,28 +4,45 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
+jobs:
+- job: ksmSecrets
+  displayName: "Inject KSM Secrets"
 
-- task: ksmazpipelinetask@0
-  name: setKsmSecretsStep
-  inputs:
-    keepersecretconfig: $(sm-config)
-    secrets: |
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
-      6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
-      6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
+  steps:
 
-- bash: |
-    echo "Using an input-macro works                : $(var_password)"
-    echo "Using an output variable (default method) : $(setKsmSecretsStep.out_password2)"
-    echo "Using an output variable                  : $(setKsmSecretsStep.out_password)"
-    echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
-    echo "Check injected secret file                : $(file /tmp/build-vsix.sh)"
-  env:
-    MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
-  name: display_secret_values
+  - task: ksmazpipelinetask@0
+    name: setKsmSecretsStep
+    inputs:
+      keepersecretconfig: $(sm-config)
+      secrets: |
+        6ya_fdc6XTsZ7i7x9Jcodg/field/password > var:var_password
+        6ya_fdc6XTsZ7i7x9Jcodg/field/password > out:out_password
+        6ya_fdc6XTsZ7i7x9Jcodg/field/password > out_password2
+        6ya_fdc6XTsZ7i7x9Jcodg/file/build-vsix.sh > file:/tmp/build-vsix.sh
+
+  - bash: |
+      echo "Using an input-macro works                : $(var_password)"
+      echo "Using an output variable (default method) : $(setKsmSecretsStep.out_password2)"
+      echo "Using an output variable                  : $(setKsmSecretsStep.out_password)"
+      echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
+      echo "Check injected secret file                : $(file /tmp/build-vsix.sh)"
+    env:
+      MY_MAPPED_ENV_VAR_PASSWORD: $(var_password) # the recommended way to map to an env variable
+    name: display_secret_values
 
 
-- bash: |
-    echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
+- job: createBinary
+  steps:
+    - bash: |
+        cat << EOF > hello.cpp
+        #include <iostream>
+        int main(){std::cout << "Hello, World!\n";}
+        EOF
+    - bash: |
+        g++ -o hello.bin hello.cpp
+    - bash: ./hello.bin
+
+
+  # - create binary
+  # - sign the binary with self signed certificate and a password
+  # - check if the file is signed
