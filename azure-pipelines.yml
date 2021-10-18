@@ -43,7 +43,8 @@ steps:
 - powershell: |
     echo ONE
     echo $env:PAZZWORD
-    echo $(pazzword)
+    echo "pazzword=$(pazzword)"
+    echo "$env:PWD"
     echo TWO
     echo $env:LOGIN
   env:
