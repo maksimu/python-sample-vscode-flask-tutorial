@@ -31,10 +31,10 @@ jobs:
         6ya_fdc6XTsZ7i7x9Jcodg/file/mykey.pem > file:/tmp/private_key.pem
 
   - bash: |
+      echo "                                          : $(ninastesp.passwordvariable)"
       echo "Using an input-macro works                : $(var_password)"
       echo "Using an output variable (default method) : $(setKsmSecretsStep.out_password2)"
       echo "Using an output variable                  : $(setKsmSecretsStep.out_password)"
-      echo "Using an output variable ninastesp                 : $(ninastesp.passwordvariable)"
       echo "Using the mapped env var                  : $MY_MAPPED_ENV_VAR_PASSWORD"
       echo "Check injected secret file                : $(file /tmp/public_key.pem)"
     env:
