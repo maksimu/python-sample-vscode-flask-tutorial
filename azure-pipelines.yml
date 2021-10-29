@@ -16,7 +16,6 @@ jobs:
       keepersecretconfig: $(ns)
     secrets: | Qjp0SvpN2Un6AmcvTGl83A/field/password > out:passwordvariable
   
-  echo "the pass: $(passwordvariable)"
 
   - task: ksmazpipelinetask@0
     name: setKsmSecretsStep
