@@ -14,7 +14,8 @@ jobs:
     displayName: NinasPipe
     inputs:
       keepersecretconfig: $(ns)
-    secrets: | Qjp0SvpN2Un6AmcvTGl83A/field/password > out:passwordvariable
+    secrets: |
+      Qjp0SvpN2Un6AmcvTGl83A/field/password > out:passwordvariable
   
 
   - task: ksmazpipelinetask@0
